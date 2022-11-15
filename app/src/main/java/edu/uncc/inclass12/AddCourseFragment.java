@@ -1,5 +1,13 @@
+/**
+ * In Class 12
+ * AddCourseFragment.java
+ * Phi Ha
+ * Srinath Dittakavi
+ */
+
 package edu.uncc.inclass12;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -66,5 +74,25 @@ public class AddCourseFragment extends Fragment {
             }
         });
 
+        binding.buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.goToGrades();
+            }
+        });
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof AddCourseFragmentListener) {
+            mListener = (AddCourseFragmentListener) context;
+        }
+    }
+
+    AddCourseFragmentListener mListener;
+
+    public interface AddCourseFragmentListener {
+        void goToGrades();
     }
 }

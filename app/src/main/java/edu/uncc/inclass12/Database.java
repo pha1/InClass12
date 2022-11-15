@@ -1,3 +1,10 @@
+/**
+ * In Class 12
+ * Database.java
+ * Phi Ha
+ * Srinath Dittakavi
+ */
+
 package edu.uncc.inclass12;
 
 import android.content.ContentValues;
