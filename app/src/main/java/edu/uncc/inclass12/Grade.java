@@ -8,15 +8,15 @@
 package edu.uncc.inclass12;
 
 public class Grade {
-    int id;
+    long id;
     String course_number, course_name, letter_grade;
     double credit_hours;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
