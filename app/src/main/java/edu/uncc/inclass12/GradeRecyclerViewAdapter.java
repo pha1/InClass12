@@ -22,7 +22,9 @@ import java.util.ArrayList;
 
 public class GradeRecyclerViewAdapter extends RecyclerView.Adapter<GradeRecyclerViewAdapter.GradeViewHolder> {
 
+    // Used for testing
     final String TAG = "test";
+
     ArrayList<Grade> grades;
     IGradeRecycler iGradeRecycler;
 
@@ -51,6 +53,7 @@ public class GradeRecyclerViewAdapter extends RecyclerView.Adapter<GradeRecycler
         holder.grade = grade;
         holder.position = position;
 
+        // Set values for each list item
         holder.courseNumber.setText(grade.course_number);
         holder.courseName.setText(grade.course_name);
         holder.courseHours.setText(String.valueOf(grade.credit_hours));
@@ -83,11 +86,13 @@ public class GradeRecyclerViewAdapter extends RecyclerView.Adapter<GradeRecycler
             rootView = itemView;
             this.iGradeRecycler = iGradeRecycler;
 
+            // Initialize the TextViews
             courseNumber = itemView.findViewById(R.id.textViewCourseNumber);
             courseName = itemView.findViewById(R.id.textViewCourseName);
             courseHours = itemView.findViewById(R.id.textViewCourseHours);
             courseLetterGrade = itemView.findViewById(R.id.textViewCourseLetterGrade);
 
+            // Initialize delete button
             delete = itemView.findViewById(R.id.imageViewDelete);
 
             delete.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +100,7 @@ public class GradeRecyclerViewAdapter extends RecyclerView.Adapter<GradeRecycler
                 public void onClick(View view) {
                     // TODO Delete from database
                     grade = grades.get(position);
+                    // Remove from the ArrayList to update the RecyclerView List
                     grades.remove(grade);
                     iGradeRecycler.delete(grade);
                 }

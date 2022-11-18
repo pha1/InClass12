@@ -101,6 +101,10 @@ public class GradesFragment extends Fragment {
         void addNewCourse();
     }
 
+    /**
+     * Calculate the GPA and display it
+     * Displays the total Credit Hours attempted
+     */
     public void calculateGpa() {
         double gpa;
         double hours;
@@ -146,10 +150,16 @@ public class GradesFragment extends Fragment {
         binding.textViewGPA.setText("GPA: " + String.format("%.2f", gpa));
     }
 
+    /**
+     * Update mGrades (Grades ArrayList)
+     */
     public void getData() {
         mGrades = dm.getGradesDAO().getAll();
     }
 
+    /**
+     * Notify the adapter to update the RecyclerView List
+     */
     public void notifyDataSetChanged() {
         adapter.notifyDataSetChanged();
     }

@@ -15,10 +15,12 @@ import android.util.Log;
 
 public class Database extends SQLiteOpenHelper {
 
+    // Used for testing
     final String TAG = "test";
+
+    // Database Name and Version
     final static String DB_NAME = "grades.db";
     final static int DATABASE_VERSION = 1;
-
 
     // creating a constructor for our database handler.
     public Database(Context context) {

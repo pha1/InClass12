@@ -46,11 +46,14 @@ public class MainActivity extends AppCompatActivity implements GradesFragment.Gr
      */
     @Override
     public void delete(Grade grade) {
+        // Remove Grade from Database
         DatabaseManager dm;
         dm = new DatabaseManager(this);
         dm.getGradesDAO().delete(grade);
 
+        // Get the Grades Fragment
         GradesFragment gradesFragment = (GradesFragment) getSupportFragmentManager().findFragmentByTag("Grades");
+        // Update the RecyclerView List and Recalculate the GPA when deleting a Course Grade
         gradesFragment.notifyDataSetChanged();
         gradesFragment.calculateGpa();
     }

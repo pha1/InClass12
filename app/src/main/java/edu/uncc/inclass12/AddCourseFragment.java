@@ -49,6 +49,7 @@ public class AddCourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Database
         dm = new DatabaseManager(getContext());
 
         binding.buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +62,9 @@ public class AddCourseFragment extends Fragment {
                 int selectedId = binding.radioGroupGrades.getCheckedRadioButtonId();
 
                 if(courseName.isEmpty() || courseNumber.isEmpty() || binding.editTextCourseHours.getText().toString().isEmpty()) {
-                   Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                } else if (courseHours < 0) {
+                    Toast.makeText(getContext(), "Please enter a positive number!", Toast.LENGTH_SHORT).show();
                 } else if(selectedId == -1){
                     Toast.makeText(getContext(), "Please select a letter grade !!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -77,14 +80,19 @@ public class AddCourseFragment extends Fragment {
                     } else {
                         courseLetterGrade = "F";
                     }
+                    // Create the Grade Object from user input
                     Grade grade = new Grade(courseNumber,courseName,courseLetterGrade, courseHours);
+                    // Save the grade to the Database
                     dm.getGradesDAO().save(grade);
                     Log.d(TAG, "onClick: " + grade);
+                    // Go back to Grades Fragment
                     mListener.goToGrades();
                 }
             }
         });
 
+        // Cancel Button
+        // Pop Back Stack
         binding.buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
