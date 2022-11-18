@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity implements GradesFragment.GradesFragmentListener, AddCourseFragment.AddCourseFragmentListener {
+public class MainActivity extends AppCompatActivity implements GradesFragment.GradesFragmentListener, AddCourseFragment.AddCourseFragmentListener, GradeRecyclerViewAdapter.IGradeRecycler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements GradesFragment.Gr
         setContentView(R.layout.activity_main);
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.rootView, new GradesFragment())
+                .add(R.id.rootView, new GradesFragment(), "Grades")
                 .commit();
     }
 
@@ -37,5 +37,21 @@ public class MainActivity extends AppCompatActivity implements GradesFragment.Gr
     @Override
     public void goToGrades() {
         getSupportFragmentManager().popBackStack();
+    }
+
+    /**
+     * This method deletes the grade from the Database
+     * Implemented by the RecyclerView's interface
+     * @param grade
+     */
+    @Override
+    public void delete(Grade grade) {
+        DatabaseManager dm;
+        dm = new DatabaseManager(this);
+        dm.getGradesDAO().delete(grade);
+
+        GradesFragment gradesFragment = (GradesFragment) getSupportFragmentManager().findFragmentByTag("Grades");
+        gradesFragment.notifyDataSetChanged();
+        gradesFragment.calculateGpa();
     }
 }

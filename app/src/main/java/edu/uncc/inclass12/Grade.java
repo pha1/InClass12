@@ -12,6 +12,15 @@ public class Grade {
     String course_number, course_name, letter_grade;
     double credit_hours;
 
+    public Grade() {}
+
+    public Grade(String course_number, String course_name, String letter_grade, double credit_hours) {
+        this.course_number = course_number;
+        this.course_name = course_name;
+        this.letter_grade = letter_grade;
+        this.credit_hours = credit_hours;
+    }
+
     public long getId() {
         return id;
     }

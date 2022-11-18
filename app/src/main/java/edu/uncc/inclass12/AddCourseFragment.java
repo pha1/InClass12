@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,9 @@ import android.widget.Toast;
 import edu.uncc.inclass12.databinding.FragmentAddCourseBinding;
 
 public class AddCourseFragment extends Fragment {
+
+    final String TAG = "test";
+
     public AddCourseFragment() {
         // Required empty public constructor
     }
@@ -39,9 +43,13 @@ public class AddCourseFragment extends Fragment {
         return binding.getRoot();
     }
 
+    DatabaseManager dm;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        dm = new DatabaseManager(getContext());
 
         binding.buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +77,10 @@ public class AddCourseFragment extends Fragment {
                     } else {
                         courseLetterGrade = "F";
                     }
-
+                    Grade grade = new Grade(courseNumber,courseName,courseLetterGrade, courseHours);
+                    dm.getGradesDAO().save(grade);
+                    Log.d(TAG, "onClick: " + grade);
+                    mListener.goToGrades();
                 }
             }
         });

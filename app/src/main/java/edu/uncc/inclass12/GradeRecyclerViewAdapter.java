@@ -83,6 +83,11 @@ public class GradeRecyclerViewAdapter extends RecyclerView.Adapter<GradeRecycler
             rootView = itemView;
             this.iGradeRecycler = iGradeRecycler;
 
+            courseNumber = itemView.findViewById(R.id.textViewCourseNumber);
+            courseName = itemView.findViewById(R.id.textViewCourseName);
+            courseHours = itemView.findViewById(R.id.textViewCourseHours);
+            courseLetterGrade = itemView.findViewById(R.id.textViewCourseLetterGrade);
+
             delete = itemView.findViewById(R.id.imageViewDelete);
 
             delete.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +95,7 @@ public class GradeRecyclerViewAdapter extends RecyclerView.Adapter<GradeRecycler
                 public void onClick(View view) {
                     // TODO Delete from database
                     grade = grades.get(position);
+                    grades.remove(grade);
                     iGradeRecycler.delete(grade);
                 }
             });
